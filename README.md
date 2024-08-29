@@ -18,19 +18,18 @@ stack setup
 stack build
 ```
 
-Luego se puede ejecutar con:
+Luego se puede ejecutar de la siguiente manera:
 ```code
 stack run
 ```
 
-y se pueden pasar argumentos agregando --
-por ejemplo para ver el texto de ayuda
+Y pasar argumentos agregando --:
 ```code
 stack run -- -h
 ```
+este ejemplo muestra el texto de ayuda.
 
-
-o cargar el entorno interactivo GHCi
+También se puede cargar el entorno interactivo GHCi
 ```code
 stack ghci
 

@@ -21,11 +21,11 @@ desugar_type :: MonadPCF m => STy -> m Ty
 desugar_type SNatTy =
   return NatTy
 
-desugar_type (STyName p n) = 
+desugar_type (STyName p n) =
   do mty <- lookupTy n
      maybe
        (failPosPCF p $ "DesugarType: el sinónimo "++n++" no está declarado")
-       (\ty  -> return (NamedTy n ty))
+       (return . NamedTy n)
        mty
 
 desugar_type (SFunTy ty ty') =
@@ -33,14 +33,14 @@ desugar_type (SFunTy ty ty') =
      ty'd <- desugar_type ty'
      return (FunTy tyd ty'd)
 
-desugar :: MonadPCF m => STerm -> m NTerm      
+desugar :: MonadPCF m => STerm -> m NTerm
 desugar (SV p v) =
   return (V p v)
 
 desugar (SConst p c) =
   return (Const p c)
 
-desugar (SLet p x [] ty t t') = 
+desugar (SLet p x [] ty t t') =
   do tyd <- desugar_type ty
      td  <- desugar t
      t'd <- desugar t'

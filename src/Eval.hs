@@ -65,5 +65,7 @@ eval (IfZ p c t e) = do
        Const _ (CNat _) -> eval e
        c' -> abort ("Error de tipo en runtime!")
 
+eval (Print _ t) = eval t
+
 -- nada más para reducir
 eval t = return t

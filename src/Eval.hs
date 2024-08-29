@@ -37,6 +37,8 @@ eval (App p l r) = do
         _ ->
            abort("Error de tipo en runtime " ++ show (le, re))
 
+eval (Let p x tyd td t'd) = eval (App p (Lam p x tyd t'd) td)
+
 eval (BinaryOp p Sum t e) = do
         te <- eval t
         ee <- eval e
